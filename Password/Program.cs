@@ -62,16 +62,37 @@ namespace Password
                     //Add the hash and number to the dictionary
                     FormattedText.Add(temp[0], temp[1]);
                 }
-                //if the user only wants the filtered output 
-                if (!fulloutput)
+                if (FormattedText.ContainsKey(CompleteHash))
                 {
-                    response = $"\nYour password has been {FormattedText[CompleteHash]} times cracked";
-                }//if the user wants the full output
+                    //if the user only wants the filtered output 
+                    if (!fulloutput)
+                    {
+                        if (Convert.ToInt32(FormattedText[CompleteHash]) > 0)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Yellow;
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        if (Convert.ToInt32(FormattedText[CompleteHash]) > 10)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                        }
+                        response = $"Your password has been {FormattedText[CompleteHash]} times cracked";
+                    }//if the user wants the full output
+                    else
+                    {
+                        response += $"\nYour password has been {FormattedText[CompleteHash]} times cracked";
+                    }
+                    
+                }
                 else
                 {
-                    response += $"\nYour password has been {FormattedText[CompleteHash]} times cracked";
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    response = "Your password has not been cracked yet!";
                 }
                 return response;
+                
             }//if its for file output
             else
             {
