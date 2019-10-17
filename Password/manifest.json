@@ -1,0 +1,10 @@
+{
+  "name": "PwndPasswordTester",
+  "short_name": "PPT",
+  "description": "a simple console app to test your passwords security",
+  "icons": [
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#FFFFFF"
+}
